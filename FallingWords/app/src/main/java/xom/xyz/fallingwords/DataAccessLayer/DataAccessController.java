@@ -2,12 +2,11 @@ package xom.xyz.fallingwords.DataAccessLayer;
 
 import android.content.Context;
 
-import java.util.ArrayList;
-
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.DataSourceInterface;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.DataSourceType;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.Local.LocalDataSource;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.Online.OnlineDataSource;
+import xom.xyz.fallingwords.DataAccessLayer.DataSource.WordsCompletionHandler;
 
 /**
  * Created by yahia on 5/8/17.
@@ -31,7 +30,7 @@ public class DataAccessController implements DataSourceInterface{
     }
     private DataAccessController(Context context) {
         onlineDataSource = new OnlineDataSource();
-        localDataSource = new LocalDataSource();
+        localDataSource = new LocalDataSource(context);
     }
 
     /*
@@ -56,11 +55,14 @@ public class DataAccessController implements DataSourceInterface{
         dataSource = getDataSourceForType(dataSourceType);
     }
 
+
     /*
     DataSourceInterface
      */
+
     @Override
-    public ArrayList getWord() {
-        return dataSource.getWord();
+    public void getWords(WordsCompletionHandler wordsCompletionHandler) {
+        dataSource.getWords(wordsCompletionHandler);
     }
+
 }
