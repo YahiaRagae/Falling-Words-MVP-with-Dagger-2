@@ -1,5 +1,8 @@
 package xom.xyz.fallingwords.design.model.factory;
 
+import java.util.List;
+
+import xom.xyz.fallingwords.DataAccessLayer.DataModels.WordItem;
 import xom.xyz.fallingwords.design.model.GameModel;
 import xom.xyz.fallingwords.design.model.SimpleGame;
 
@@ -14,11 +17,11 @@ public class GameFactory {
     }
 
 
-    public static GameModel getGameModel(GameTypes type){
+    public static GameModel getGameModel(GameTypes type, List<WordItem> words){
         GameModel game = null;
         switch (type){
             case GameTypesSimpleGame:
-                game = new SimpleGame();
+                game = new SimpleGame(words);
             break;
 
             default:
