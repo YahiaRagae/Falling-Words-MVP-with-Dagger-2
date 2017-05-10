@@ -3,6 +3,8 @@ package xom.xyz.fallingwords.main;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
     @BindView(R.id.tv_answer)
     TextView mTVAnswer;
 
-
+    @BindView(R.id.btn_start_game)
+    Button btnStartNewGame;
 
 
     @Override
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
 
     @Override
     public void showStartNewGameButton() {
-
+        btnStartNewGame.setVisibility(View.INVISIBLE);
     }
 
     @Override
