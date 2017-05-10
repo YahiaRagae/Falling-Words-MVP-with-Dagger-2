@@ -1,26 +1,48 @@
 package xom.xyz.fallingwords.main;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+
+import com.leo.simplearcloader.ArcConfiguration;
+import com.leo.simplearcloader.SimpleArcDialog;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import xom.xyz.fallingwords.R;
 
-public class MainActivity extends AppCompatActivity implements  IMainView   { 
+public class MainActivity extends AppCompatActivity implements  IMainView   {
+    MainPresenterImpl  mainPresenter;
 
+    SimpleArcDialog hud;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mainPresenter = new MainPresenterImpl(this,new MainInteractorImpl());
+        mainPresenter.onLoadData();
     }
 
     @Override
     public void showLoading() {
-
+        if (hud == null) {
+            hud = new SimpleArcDialog(this);
+            ArcConfiguration configuration = new ArcConfiguration(this);
+            configuration.setLoaderStyle(SimpleArcLoader.STYLE.COMPLETE_ARC);
+            int[] colors = {ContextCompat.getColor(this, R.color.colorAccent),
+                    ContextCompat.getColor(this, R.color.colorPrimary),
+                    ContextCompat.getColor(this, R.color.colorPrimaryDark)};
+            configuration.setColors(colors);
+            hud.setConfiguration(configuration);
+        }
+        hud.show();
     }
 
     @Override
     public void hideLoading() {
-
+        if (hud != null) {
+            hud.dismiss();
+        }
     }
 
     @Override
