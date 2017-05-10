@@ -33,10 +33,10 @@ public class LocalDataSource implements DataSourceInterface{
     }
 
 
-    public String loadJSONFromAsset(Context ctx) {
+    protected String loadJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = ctx.getAssets().open("words.json");
+            InputStream is = mContext.getAssets().open("words.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -57,7 +57,7 @@ public class LocalDataSource implements DataSourceInterface{
         protected Void doInBackground(WordsCompletionHandler... params) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Type listType = new TypeToken<ArrayList<WordItem>>(){}.getType();
-            List<WordItem > items = gson.fromJson(loadJSONFromAsset(mContext), listType);
+            List<WordItem > items = gson.fromJson(loadJSONFromAsset(), listType);
             params[0].completed(items,true);
             return null;
         }
