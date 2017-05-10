@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
         int height = gameContainer.getMeasuredHeight() - mTVAnswer.getMeasuredHeight() - mTVQuestion.getMeasuredHeight();
 
         TranslateAnimation anim = new TranslateAnimation(0, 0,0,height);
-        anim.setDuration(duration*1000); 
+        anim.setDuration(duration*1000);
         mTVAnswer.startAnimation(anim);
 
     }
@@ -175,11 +175,11 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
     }
 
 
-    private int getfinishedSeconds(long millisUntilFinished)
+    protected int getfinishedSeconds(long millisUntilFinished)
     {
         return (int) ((millisUntilFinished % 60000) / 1000);
     }
-    private int getProgress(int finishedSeconds,  long duration){
+    protected int getProgress(int finishedSeconds,  long duration){
         int progress = (int) (duration  - finishedSeconds);
         progress = progress * 100 / (int)duration ;
         return progress;
