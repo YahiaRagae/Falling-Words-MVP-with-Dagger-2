@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import xom.xyz.fallingwords.R;
 
+
 public class MainActivity extends AppCompatActivity implements  IMainView   {
     MainPresenterImpl  mainPresenter;
     SimpleArcDialog hud;
@@ -139,13 +140,12 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
         mProgressCounter = new CountDownTimer(duration*1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                String v = String.format(Locale.US, "%02d", millisUntilFinished / 60000);
-                int va = (int) ((millisUntilFinished % 60000) / 1000);
-                mTVCounter.setText(String.format(Locale.US, v + ":" + "%02d", va));
-                int progress = (int) (duration  - va);
-                progress = progress * 100 / (int)duration ;
+                int finishedSeconds = getfinishedSeconds(millisUntilFinished);
+                int progress = getProgress(finishedSeconds,duration);
+                mTVCounter.setText(String.format(Locale.US,  "%02d", finishedSeconds));
                 pbTimer.setProgress(progress);
                 //Animate Answer To Bottom
+
             }
 
             public void onFinish() {
@@ -156,8 +156,22 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
         };
         mProgressCounter.start();
     }
+ 
+
     private void stopCounter( ){
         mProgressCounter.cancel();
     }
+
+
+    private int getfinishedSeconds(long millisUntilFinished)
+    {
+        return (int) ((millisUntilFinished % 60000) / 1000);
+    }
+    private int getProgress(int finishedSeconds,  long duration){
+        int progress = (int) (duration  - finishedSeconds);
+        progress = progress * 100 / (int)duration ;
+        return progress;
+    }
+
 
 }
