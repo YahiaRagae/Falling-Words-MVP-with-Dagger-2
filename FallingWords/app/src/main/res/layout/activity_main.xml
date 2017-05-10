@@ -10,5 +10,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="xom.xyz.fallingwords.main.MainActivity">
 
-   <include layout="@layout/game_header"/>
+    <include
+        android:id="@+id/header"
+        layout="@layout/game_header" />
+
+
+    <include
+        android:id="@+id/game_layout"
+        layout="@layout/game_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/fotter"
+        android:layout_below="@+id/header"></include>
+
+    <include
+        android:id="@+id/fotter"
+        layout="@layout/game_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:id="@+id/btn_start_game"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/start_game" />
 </RelativeLayout>

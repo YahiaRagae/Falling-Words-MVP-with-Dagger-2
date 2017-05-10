@@ -3,6 +3,14 @@
     <string name="error">Error while loading Data!!</string>
 
 
-    <string name="right_answers">Right Answers</string>
-    <string name="wrong_answers">Wrong Answers</string>
+
+    <string name="start_game">Start New Game</string>
+
+    <string name="right_answers">Right Score</string>
+    <string name="wrong_answers">Wrong Score</string>
+
+
+    <string name="right">Right</string>
+    <string name="wrong">Wrong</string>
+
 </resources>
