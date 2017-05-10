@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FallingWords</string>
+    <string name="error">Error while loading Data!!</string>
 </resources>
