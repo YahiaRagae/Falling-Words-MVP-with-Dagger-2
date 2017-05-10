@@ -52,22 +52,26 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        initHUD();
+
         mainPresenter = new MainPresenterImpl(this,new MainInteractorImpl());
         mainPresenter.onLoadData();
     }
 
+    private void initHUD(){
+        hud = new SimpleArcDialog(this);
+        ArcConfiguration configuration = new ArcConfiguration(this);
+        configuration.setLoaderStyle(SimpleArcLoader.STYLE.COMPLETE_ARC);
+        int[] colors = {ContextCompat.getColor(this, R.color.colorAccent),
+                ContextCompat.getColor(this, R.color.colorPrimary),
+                ContextCompat.getColor(this, R.color.colorPrimaryDark)};
+        configuration.setColors(colors);
+        hud.setConfiguration(configuration);
+    }
+
+
     @Override
     public void showLoading() {
-        if (hud == null) {
-            hud = new SimpleArcDialog(this);
-            ArcConfiguration configuration = new ArcConfiguration(this);
-            configuration.setLoaderStyle(SimpleArcLoader.STYLE.COMPLETE_ARC);
-            int[] colors = {ContextCompat.getColor(this, R.color.colorAccent),
-                    ContextCompat.getColor(this, R.color.colorPrimary),
-                    ContextCompat.getColor(this, R.color.colorPrimaryDark)};
-            configuration.setColors(colors);
-            hud.setConfiguration(configuration);
-        }
         hud.show();
     }
 
