@@ -5,8 +5,10 @@ import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
     ProgressBar pbTimer;
     @BindView(R.id.tv_counter)
     TextView mTVCounter;
+
+    @BindView(R.id.game_layout)
+    RelativeLayout gameContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
 
     private void startCounter(final long duration){
         pbTimer.setProgress(0);
-
+        animateAnswer(duration);
         mProgressCounter = new CountDownTimer(duration*1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -144,8 +149,6 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
                 int progress = getProgress(finishedSeconds,duration);
                 mTVCounter.setText(String.format(Locale.US,  "%02d", finishedSeconds));
                 pbTimer.setProgress(progress);
-                //Animate Answer To Bottom
-
             }
 
             public void onFinish() {
@@ -156,10 +159,19 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
         };
         mProgressCounter.start();
     }
- 
+
+    private void animateAnswer(   long duration) {
+        int height = gameContainer.getMeasuredHeight() - mTVAnswer.getMeasuredHeight() - mTVQuestion.getMeasuredHeight();
+
+        TranslateAnimation anim = new TranslateAnimation(0, 0,0,height);
+        anim.setDuration(duration*1000); 
+        mTVAnswer.startAnimation(anim);
+
+    }
 
     private void stopCounter( ){
         mProgressCounter.cancel();
+        mTVAnswer.clearAnimation();
     }
 
 
