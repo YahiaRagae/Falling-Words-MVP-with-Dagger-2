@@ -3,17 +3,27 @@ package xom.xyz.fallingwords.main;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.leo.simplearcloader.ArcConfiguration;
 import com.leo.simplearcloader.SimpleArcDialog;
 import com.leo.simplearcloader.SimpleArcLoader;
 
+import butterknife.BindView;
 import xom.xyz.fallingwords.R;
 
 public class MainActivity extends AppCompatActivity implements  IMainView   {
     MainPresenterImpl  mainPresenter;
-
     SimpleArcDialog hud;
+
+    @BindView(R.id.tv_right_score)
+    TextView mTVRightScore;
+
+    @BindView(R.id.tv_wrong_score)
+    TextView mTVWrongScore;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,16 +67,16 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
 
     @Override
     public void setRightScore(String scrore) {
-
+        mTVRightScore.setText(scrore);
     }
 
     @Override
     public void setWrongScore(String scrore) {
-
+        mTVWrongScore.setText(scrore);
     }
 
     @Override
     public void showErrorMessage(String string) {
-
+        Toast.makeText(this,string,Toast.LENGTH_SHORT).show();
     }
 }
