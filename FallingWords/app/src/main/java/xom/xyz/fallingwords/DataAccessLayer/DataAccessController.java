@@ -1,7 +1,6 @@
 package xom.xyz.fallingwords.DataAccessLayer;
 
-import android.content.Context;
-
+import xom.xyz.fallingwords.App;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.DataSourceInterface;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.DataSourceType;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.Local.LocalDataSource;
@@ -21,16 +20,16 @@ public class DataAccessController implements DataSourceInterface{
 
     private static DataAccessController sharedInstance;
 
-    public static DataAccessController getInstance(Context context) {
+    public static DataAccessController getInstance( ) {
         if (sharedInstance == null) {
-            sharedInstance = new DataAccessController(context);
+            sharedInstance = new DataAccessController();
         }
 
         return sharedInstance;
     }
-    private DataAccessController(Context context) {
+    private DataAccessController() {
         onlineDataSource = new OnlineDataSource();
-        localDataSource = new LocalDataSource(context);
+        localDataSource = new LocalDataSource(App.getContext());
     }
 
     /*
