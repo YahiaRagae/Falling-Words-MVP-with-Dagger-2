@@ -71,11 +71,20 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
 
     @Override
     public void showStartNewGameButton() {
-        btnStartNewGame.setVisibility(View.INVISIBLE);
+        btnStartNewGame.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void setGame(String question, Double Duration) {
+    public void startGame(String question,String proposedAnswer,Double Duration){
+        btnStartNewGame.setVisibility(View.INVISIBLE);
+
+        mTVAnswer.setText(proposedAnswer);
+        mTVQuestion.setText(question);
+
+        //Start Counter
+
+        //Start Animatin Answer
+
 
     }
 

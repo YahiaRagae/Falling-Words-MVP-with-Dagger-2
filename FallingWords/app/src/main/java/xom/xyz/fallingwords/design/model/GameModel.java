@@ -7,7 +7,7 @@ package xom.xyz.fallingwords.design.model;
 public interface GameModel {
     String getQuestion();
     String getRightAnswer();
-    String getWrongAnser();
+    String getProposedAnswer();
     int getScore();
     Double getTime();
 }

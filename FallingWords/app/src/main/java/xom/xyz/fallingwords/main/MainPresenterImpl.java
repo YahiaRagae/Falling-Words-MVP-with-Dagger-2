@@ -52,7 +52,7 @@ public class MainPresenterImpl implements IMainPresenter,WordsCompletionHandler 
     public void onStartNewGameClicked() {
         if(items != null){
             currentGame = mainInteractor.loadNewGame(GameFactory.GameTypes.GameTypesSimpleGame,items);
-            iMainView.setGame(currentGame.getQuestion(),currentGame.getTime());
+            iMainView.startGame(currentGame.getQuestion(),currentGame.getProposedAnswer(),currentGame.getTime());
         }else{
             iMainView.showErrorMessage(App.getContext().getString(R.string.error));
         }

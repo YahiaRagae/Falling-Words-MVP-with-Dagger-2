@@ -8,7 +8,7 @@ public interface IMainView {
     void showLoading();
     void hideLoading();
     void showStartNewGameButton();
-    void setGame(String question,Double Duration);
+    void startGame(String question,String proposedAnswer,Double Duration);
     void setRightScore(String scrore);
     void setWrongScore(String scrore);
 
