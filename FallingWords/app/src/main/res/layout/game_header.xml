@@ -2,8 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
-    android:padding="15dp"
     android:orientation="vertical">
 
     <include
@@ -31,7 +29,7 @@
                 android:id="@+id/tv_right_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -43,13 +41,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/right_answers" />
+                android:text="@string/wrong_answers" />
 
             <TextView
                 android:id="@+id/tv_wrong_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text="0" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -12,6 +12,9 @@
     tools:context="xom.xyz.fallingwords.main.MainActivity">
 
     <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
         android:id="@+id/header"
         layout="@layout/game_header" />
 
@@ -35,5 +38,6 @@
         android:id="@+id/btn_start_game"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/header"
         android:text="@string/start_game" />
 </RelativeLayout>

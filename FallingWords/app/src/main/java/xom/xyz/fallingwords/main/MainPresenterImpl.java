@@ -60,38 +60,38 @@ public class MainPresenterImpl implements IMainPresenter,WordsCompletionHandler 
 
     @Override
     public void onCorrectTranslationButtonClicked() {
-        rightScore += currentGame.getScore();
-        if(iMainView != null ){
-            iMainView.setRightScore(rightScore+"");
-            iMainView.showStartNewGameButton();
+        if(currentGame.getProposedAnswer().equals(currentGame.getRightAnswer())){
+            rightScore += currentGame.getScore();
+        }else{
+            wrongScore += currentGame.getScore();
         }
+        setScore();
 
     }
 
+
     @Override
     public void onWrongTranslationButtonClicked() {
-        wrongScore += currentGame.getScore();
-        if(iMainView != null ){
-            iMainView.setWrongScore(wrongScore+"");
-            iMainView.showStartNewGameButton();
+        if(!currentGame.getProposedAnswer().equals(currentGame.getRightAnswer())){
+            rightScore += currentGame.getScore();
+        }else{
+            wrongScore += currentGame.getScore();
         }
+        setScore();
 
     }
 
     @Override
     public void onWordReachBottomOfScreen() {
         wrongScore += currentGame.getScore();
-        if(iMainView != null ){
-            iMainView.setWrongScore(wrongScore+"");
-            iMainView.showStartNewGameButton();
-        }
+        setScore();
     }
 
-    @Override
-    public void onTimeOutWithoutSelection() {
-        wrongScore += currentGame.getScore();
+
+    private void setScore() {
         if(iMainView != null ){
             iMainView.setWrongScore(wrongScore+"");
+            iMainView.setRightScore(rightScore+"");
             iMainView.showStartNewGameButton();
         }
     }
