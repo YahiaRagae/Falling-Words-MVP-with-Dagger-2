@@ -6,6 +6,7 @@ import xom.xyz.fallingwords.DataAccessLayer.DataSource.DataSourceType;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.Local.LocalDataSource;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.Online.OnlineDataSource;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.WordsCompletionHandler;
+import xom.xyz.fallingwords.Utils.Connectivity;
 
 /**
  * Created by yahia on 5/8/17.
@@ -23,6 +24,12 @@ public class DataAccessController implements DataSourceInterface{
     public static DataAccessController getInstance( ) {
         if (sharedInstance == null) {
             sharedInstance = new DataAccessController();
+        }
+
+        if(Connectivity.isNetworkAvailable()){
+            sharedInstance.setDataSource(DataSourceType.DataSourceOnline);
+        }else{
+            sharedInstance.setDataSource(DataSourceType.DataSourceLocal);
         }
 
         return sharedInstance;
