@@ -6,8 +6,8 @@
 
     <string name="start_game">Start New Game</string>
 
-    <string name="right_answers">Right Score</string>
-    <string name="wrong_answers">Wrong Score</string>
+    <string name="right_answers">√</string>
+    <string name="wrong_answers">X</string>
 
 
     <string name="right">Right</string>

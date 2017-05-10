@@ -27,7 +27,7 @@ public class SimpleGame implements  GameModel{
     }
 
     @Override
-    public String getWrongAnser() {
+    public String getProposedAnswer() {
         return null;
     }
 
@@ -37,7 +37,7 @@ public class SimpleGame implements  GameModel{
     }
 
     @Override
-    public Double getTime() {
+    public Long getTime() {
         return null;
     }
 }

@@ -1,16 +1,20 @@
 package xom.xyz.fallingwords.main;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leo.simplearcloader.ArcConfiguration;
 import com.leo.simplearcloader.SimpleArcDialog;
 import com.leo.simplearcloader.SimpleArcLoader;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
     @BindView(R.id.btn_start_game)
     Button btnStartNewGame;
 
+
+    @BindView(R.id.pb_timer_circle)
+    ProgressBar pbTimer;
+    @BindView(R.id.tv_counter)
+    TextView mTVCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,15 +84,15 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
     }
 
     @Override
-    public void startGame(String question,String proposedAnswer,Double Duration){
+    public void startGame(String question,String proposedAnswer,Long duration){
         btnStartNewGame.setVisibility(View.INVISIBLE);
 
         mTVAnswer.setText(proposedAnswer);
         mTVQuestion.setText(question);
 
         //Start Counter
+        startCounter(duration);
 
-        //Start Animatin Answer
 
 
     }
@@ -115,4 +124,30 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
     @OnClick(R.id.btn_start_game)void onStartNewGameBtnClicked(){
         mainPresenter.onStartNewGameClicked();
     }
+
+    private CountDownTimer mProgressCounter;
+
+    private void startCounter(final long duration){
+        pbTimer.setProgress(0);
+
+        mProgressCounter = new CountDownTimer(duration, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                String v = String.format(Locale.US, "%02d", millisUntilFinished / 60000);
+                int va = (int) ((millisUntilFinished % 60000) / 1000);
+                mTVCounter.setText(String.format(Locale.US, v + ":" + "%02d", va));
+                int progress = (int) (duration  - millisUntilFinished);
+                progress = progress * 100 / (int)duration ;
+                pbTimer.setProgress(progress);
+                //Animate Answer To Bottom
+            }
+
+            public void onFinish() {
+                mTVCounter.setText("00:00");
+                pbTimer.setProgress(100);
+            }
+        };
+        mProgressCounter.start();
+    }
+
 }

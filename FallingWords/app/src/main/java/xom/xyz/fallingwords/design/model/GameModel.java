@@ -9,5 +9,5 @@ public interface GameModel {
     String getRightAnswer();
     String getProposedAnswer();
     int getScore();
-    Double getTime();
+    Long getTime();
 }
