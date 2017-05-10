@@ -114,10 +114,12 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
 
 
     @OnClick(R.id.btn_correct_translation) void onRightBtnClicked(){
+        stopCounter();
         mainPresenter.onCorrectTranslationButtonClicked();
     }
 
     @OnClick(R.id.btn_wrong_translation)void onWrongTranslationButtonClicked(){
+        stopCounter();
         mainPresenter.onWrongTranslationButtonClicked();
     }
 
@@ -130,13 +132,13 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
     private void startCounter(final long duration){
         pbTimer.setProgress(0);
 
-        mProgressCounter = new CountDownTimer(duration, 1000) {
+        mProgressCounter = new CountDownTimer(duration*1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 String v = String.format(Locale.US, "%02d", millisUntilFinished / 60000);
                 int va = (int) ((millisUntilFinished % 60000) / 1000);
                 mTVCounter.setText(String.format(Locale.US, v + ":" + "%02d", va));
-                int progress = (int) (duration  - millisUntilFinished);
+                int progress = (int) (duration  - va);
                 progress = progress * 100 / (int)duration ;
                 pbTimer.setProgress(progress);
                 //Animate Answer To Bottom
@@ -145,9 +147,13 @@ public class MainActivity extends AppCompatActivity implements  IMainView   {
             public void onFinish() {
                 mTVCounter.setText("00:00");
                 pbTimer.setProgress(100);
+                mainPresenter.onWordReachBottomOfScreen();
             }
         };
         mProgressCounter.start();
+    }
+    private void stopCounter( ){
+        mProgressCounter.cancel();
     }
 
 }

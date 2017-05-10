@@ -10,5 +10,4 @@ public interface IMainPresenter {
     void onCorrectTranslationButtonClicked();
     void onWrongTranslationButtonClicked();
     void onWordReachBottomOfScreen();
-    void onTimeOutWithoutSelection();
 }
