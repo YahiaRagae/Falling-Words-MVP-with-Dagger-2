@@ -25,7 +25,7 @@ Simple Gmae of Falling Words to figure the right words between English and Spani
 ## Desgin Pattern Used ##
 -  MVP Pattern
 -  Factory Pattern
--  Single Tone Pattern
+-  SingleTone Pattern
 -  Repository Pattern 
 -  Facade Pattern
 
