@@ -2,6 +2,8 @@ package xom.xyz.fallingwords.main;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import xom.xyz.fallingwords.App;
 import xom.xyz.fallingwords.DataAccessLayer.DataModels.WordItem;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.WordsCompletionHandler;
@@ -22,9 +24,14 @@ public class MainPresenterImpl implements IMainPresenter,WordsCompletionHandler 
     private int rightScore = 0 ;
     private int wrongScore = 0 ;
 
+    @Inject
+    App mContext;
+
     public MainPresenterImpl(IMainView iMainView,MainInteractorImpl mainInteractor) {
         this.iMainView = iMainView;
         this.mainInteractor = mainInteractor;
+
+        App.getAppComponent().inject(this);
     }
 
     @Override
@@ -54,7 +61,7 @@ public class MainPresenterImpl implements IMainPresenter,WordsCompletionHandler 
             currentGame = mainInteractor.loadNewGame(GameFactory.GameTypes.GameTypesSimpleGame,items);
             iMainView.startGame(currentGame.getQuestion(),currentGame.getProposedAnswer(),currentGame.getTime());
         }else{
-            iMainView.showErrorMessage(App.getContext().getString(R.string.error));
+            iMainView.showErrorMessage(mContext.getString(R.string.error));
         }
     }
 

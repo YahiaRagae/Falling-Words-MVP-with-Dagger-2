@@ -1,6 +1,5 @@
 package xom.xyz.fallingwords.DataAccessLayer.DataSource.Local;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
@@ -13,6 +12,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import xom.xyz.fallingwords.App;
 import xom.xyz.fallingwords.DataAccessLayer.DataModels.WordItem;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.DataSourceInterface;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.WordsCompletionHandler;
@@ -22,9 +24,11 @@ import xom.xyz.fallingwords.DataAccessLayer.DataSource.WordsCompletionHandler;
  */
 
 public class LocalDataSource implements DataSourceInterface{
-    Context  mContext;
-    public LocalDataSource(Context mContext){
-        this.mContext = mContext;
+    @Inject
+    App mContext;
+
+    public LocalDataSource(){
+        App.getAppComponent().inject(this);
     }
 
     @Override

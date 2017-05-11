@@ -1,22 +1,38 @@
 package xom.xyz.fallingwords;
 
 import android.app.Application;
-import android.content.Context;
+
+import xom.xyz.fallingwords.di.AppComponent;
+import xom.xyz.fallingwords.di.AppModule;
+import xom.xyz.fallingwords.di.DaggerAppComponent;
 
 /**
  * Created by yahia on 5/10/17.
  */
 
-public class App extends Application {
-    private static Context context;
 
-    public static Context getContext() {
-        return context;
-    }
+public class App extends Application {
+
+    static AppComponent appComponent;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
-        context = getApplicationContext();
+        appComponent = initAppCompnent(this);
     }
+
+    private AppComponent initAppCompnent(App app) {
+        if(appComponent == null){
+            appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+        }
+
+        return appComponent;
+    }
+
+    public static AppComponent getAppComponent(){
+        return  appComponent;
+    }
+
+
 }

@@ -27,7 +27,7 @@ public class LocalDataSourceTest {
     @Before
     public void setUp() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
-        localDataSource = new LocalDataSource(appContext);
+        localDataSource = new LocalDataSource();
     }
 
     @Test

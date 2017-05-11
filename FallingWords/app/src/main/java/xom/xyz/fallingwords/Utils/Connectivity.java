@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import javax.inject.Inject;
+
 import xom.xyz.fallingwords.App;
 
 /**
@@ -11,10 +13,16 @@ import xom.xyz.fallingwords.App;
  */
 
 public class Connectivity {
+    @Inject
+    App mContext;
 
-    public static boolean isNetworkAvailable() {
+    public Connectivity(){
+        App.getAppComponent().inject(this);
+    }
+
+    public  boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }

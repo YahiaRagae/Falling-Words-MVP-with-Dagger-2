@@ -1,6 +1,5 @@
 package xom.xyz.fallingwords.DataAccessLayer;
 
-import xom.xyz.fallingwords.App;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.DataSourceInterface;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.DataSourceType;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.Local.LocalDataSource;
@@ -26,7 +25,7 @@ public class DataAccessController implements DataSourceInterface{
             sharedInstance = new DataAccessController();
         }
 
-        if(Connectivity.isNetworkAvailable()){
+        if(new Connectivity().isNetworkAvailable()){
             sharedInstance.setDataSource(DataSourceType.DataSourceOnline);
         }else{
             sharedInstance.setDataSource(DataSourceType.DataSourceLocal);
@@ -36,7 +35,7 @@ public class DataAccessController implements DataSourceInterface{
     }
     private DataAccessController() {
         onlineDataSource = new OnlineDataSource();
-        localDataSource = new LocalDataSource(App.getContext());
+        localDataSource = new LocalDataSource( );
     }
 
     /*
