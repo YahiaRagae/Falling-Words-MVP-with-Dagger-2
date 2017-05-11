@@ -3,7 +3,6 @@ package xom.xyz.fallingwords.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import xom.xyz.fallingwords.App;
 import xom.xyz.fallingwords.DataAccessLayer.DataSource.Local.LocalDataSource;
 import xom.xyz.fallingwords.Utils.Connectivity;
 import xom.xyz.fallingwords.main.MainPresenterImpl;
@@ -15,12 +14,8 @@ import xom.xyz.fallingwords.main.MainPresenterImpl;
 @Singleton
 @Component(modules = {AppModule.class})
 public interface AppComponent {
-    App providesContext() ;
-
     void inject(LocalDataSource mainActivity);
     void inject(MainPresenterImpl mainPresenterImpl);
     void inject(Connectivity connectivity);
-
-
 }
 
